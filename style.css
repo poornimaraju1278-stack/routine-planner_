@@ -1,0 +1,37 @@
+body {
+  background: linear-gradient(120deg, #a18cd1, #fbc2eb);
+  font-family: Arial;
+}
+
+.container {
+  width: 60%;
+  margin: auto;
+  background: white;
+  padding: 30px;
+  margin-top: 40px;
+  border-radius: 20px;
+  text-align: center;
+}
+
+input, select {
+  width: 80%;
+  padding: 10px;
+  margin: 8px;
+  border-radius: 10px;
+}
+
+button {
+  padding: 12px 25px;
+  border-radius: 20px;
+  background: #6a5acd;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.planner-card {
+  background: #f0f4ff;
+  padding: 15px;
+  border-radius: 15px;
+  margin: 10px;
+}
