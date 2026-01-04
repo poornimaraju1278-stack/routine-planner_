@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>RoutiPlan</title>
+
+  <!-- PyScript -->
+  <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
+  <script defer src="https://pyscript.net/latest/pyscript.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+  <h1>🌙 RoutiPlan</h1>
+  <p>Routine Recommender & Productivity Planner</p>
+
+  <input id="name" placeholder="Your Name">
+
+  <select id="profession">
+    <option>Student</option>
+    <option>Employee</option>
+    <option>Freelancer</option>
+    <option>Entrepreneur</option>
+    <option>Homemaker</option>
+    <option>Content Creator</option>
+    <option>Other</option>
+  </select>
+
+  <select id="time">
+    <option value="Morning">Morning Person</option>
+    <option value="Night">Night Person</option>
+  </select>
+
+  <select id="progress">
+    <option>Slow Progressor</option>
+    <option>Fast Progressor</option>
+  </select>
+
+  <h3>Tasks</h3>
+
+  <input class="task" placeholder="Task 1">
+  <select class="priority">
+    <option value="1">🔴 High</option>
+    <option value="2">🟠 Medium</option>
+    <option value="3">🟢 Low</option>
+  </select>
+
+  <input class="task" placeholder="Task 2">
+  <select class="priority">
+    <option value="1">🔴 High</option>
+    <option value="2">🟠 Medium</option>
+    <option value="3">🟢 Low</option>
+  </select>
+
+  <button py-click="generate_planner()">Generate Planner ✨</button>
+
+  <div id="output"></div>
+</div>
+
+<py-script>
+from js import document
+
+def generate_planner():
+    name = document.getElementById("name").value
+    time_type = document.getElementById("time").value
+
+    tasks = document.getElementsByClassName("task")
+    priorities = document.getElementsByClassName("priority")
+
+    task_list = []
+
+    for i in range(len(tasks)):
+        if tasks[i].value != "":
+            task_list.append({
+                "task": tasks[i].value,
+                "priority": int(priorities[i].value)
+            })
+
+    task_list.sort(key=lambda x: x["priority"])
+
+    if time_type == "Morning":
+        slots = ["6–8 AM", "8–10 AM", "10–12 PM"]
+    else:
+        slots = ["6–8 PM", "8–10 PM", "10–12 AM"]
+
+    output = f"<h2>🌟 {name}'s Planner</h2>"
+
+    for i, task in enumerate(task_list):
+        output += f"""
+        <div class='planner-card'>
+            <h3>{slots[i % len(slots)]}</h3>
+            <p>{task['task']}</p>
+        </div>
+        """
+
+    document.getElementById("output").innerHTML = output
+</py-script>
+
+</body>
+</html>
